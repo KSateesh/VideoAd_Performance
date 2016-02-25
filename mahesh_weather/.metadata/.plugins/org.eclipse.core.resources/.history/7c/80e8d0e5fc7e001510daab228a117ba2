@@ -1,0 +1,54 @@
+package com.weather;
+
+
+	
+		import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+
+	import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
+	import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+	public class VideoAds {
+				AppiumDriver d;
+		@BeforeClass
+		public void setUp() throws Exception
+		{
+			System.out.println("Caps setting");
+			DesiredCapabilities caps=new DesiredCapabilities();
+			caps.setCapability("deviceName", "NEXUS4");
+			caps.setCapability("platformName", "Android");
+			caps.setCapability("platformVersion", "5.1.1");
+			
+			caps.setCapability("appPackage", "com.weather.Weather");
+			caps.setCapability("appActivity", "com.weather.Weather.app.SplashScreenActivity");
+			d = new AndroidDriver(new URL("http://127.0.0.1:4722/wd/hub"), caps);
+			System.out.println("Caps done");
+			d.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			
+			
+		}
+		@Test
+		public void testAd() throws Exception
+		{
+			System.out.println("Now in Test method");
+			
+			Thread.sleep(8000);
+		}
+		@AfterClass
+		public void stop()
+		{
+			d.closeApp();
+		}
+
+
+	}
+
+
+

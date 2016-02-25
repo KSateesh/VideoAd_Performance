@@ -1,0 +1,146 @@
+package com.weather;
+
+
+	
+		import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+
+	import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+	import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+	public class VideoAds {
+				AppiumDriver d;
+		@BeforeClass
+		public void setUp() throws Exception
+		{
+			System.out.println("Caps setting");
+			DesiredCapabilities caps=new DesiredCapabilities();
+			caps.setCapability("deviceName", "NEXUS4");
+			caps.setCapability("platformName", "Android");
+			caps.setCapability("platformVersion", "5.1.1");
+			
+			caps.setCapability("appPackage", "com.weather.Weather");
+			caps.setCapability("appActivity", "com.weather.Weather.app.SplashScreenActivity");
+			d = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+			System.out.println("Caps done");
+			d.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			
+			
+		}
+		@Test
+		public void testAd() throws Exception
+		{
+			
+			System.out.println("Now in Test method");
+			
+			/*JavascriptExecutor js = (JavascriptExecutor) d ;
+			  for(int i=1;i<=84;i++)
+			  {
+			  HashMap<String, String> scrollObject = new HashMap<String, String>();
+			  scrollObject.put("direction", "down");
+			  js.executeScript("mobile: scroll", scrollObject);
+
+82837
+			  }*/
+			Thread.sleep(8000);
+		
+			d.findElement(By.id("com.weather.Weather:id/search")).click();
+			d.findElement(By.id("com.weather.Weather:id/search")).sendKeys("30302");
+			d.findElement(By.id("android:id/home")).click();
+			
+			/*List<WebElement> zip= d.findElements(By.id("android:id/search_src_text"));
+			//zip.sendKeys("atlanta");
+					System.out.println(zip.size());	
+			Thread.sleep(8000);
+			//List<WebElement> element= d.findElements(By.className("android.widget.EditText"));
+		TouchAction t=new TouchAction(d);
+		//t.longPress(zip).release().perform();
+		t.longPress(zip.get(0)).moveTo(zip.get(0)).release().perform();
+		//d.scrollTo("Atlanta");
+			  String str=d.findElement(By.className("android.widget.EditText")).getText();
+		   System.out.println(str);
+		  // new Select(d.findElement(By.id("android:id/search_src_text"))).selectByIndex(0);
+			     String s[]=str.split("\n");
+		      System.out.println(s.length);
+		      for (int i = 1; i < s.length; i++) {
+		    	 System.out.println(s[i]);
+		      }
+		
+		   
+		  */
+		   
+			
+			
+			
+			
+			/*JavascriptExecutor js = (JavascriptExecutor) d ;
+			  for(int i=1;i<=10;i++)
+			  {
+			  HashMap<String, String> scrollObject = new HashMap<String, String>();
+			  scrollObject.put("direction", "down");
+			  js.executeScript("mobile: scroll", scrollObject);
+			  }*/
+			  
+			TouchAction t=new TouchAction(d);
+			//t.press(0, 1533).waitAction(300).moveTo(0, 219).release().perform();
+			//d.scrollToExact("Video");
+			
+			
+			//scrolling down to videos module
+			
+			System.out.println("Scrolling started ");
+			WebElement Scroll_1 = d.findElement(By.id("com.weather.Weather:id/now_circle_include"));
+			int topY = Scroll_1.getLocation().getY();
+			int bottomY = topY + Scroll_1.getSize().getHeight();
+			int centerX = Scroll_1.getLocation().getX() + (Scroll_1.getSize().getWidth() / 2);
+			System.out.println("TopY :" + topY + "Bottom :" + bottomY + "center :" + centerX);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			d.swipe(centerX, bottomY, centerX, topY, 10000);
+			System.out.println("Scrolling ended at Videos module");
+			d.findElement(By.id("com.weather.Weather:id/video2_grid_item_imageholder")).click();
+			String video_duration=d.findElement(By.id("com.weather.Weather:id/time_duration")).getText();
+			
+			System.out.println("Video duration is ---->"+video_duration);
+			
+			//Scrolling Video ProgressBar 
+			System.out.println("\n"+"scrolling Video Progress bar");
+			WebElement seekbar=d.findElement(By.id("com.weather.Weather:id/mediacontroller_progress"));
+			t.longPress(seekbar).moveTo(250,0).release().perform();
+			System.out.println(d.findElement(By.id("com.android.androidui:id/textProgress")).getText());
+			
+		
+			//TouchAction.new.press(x: start_x, y: start_y).wait(1000).move_to(x:end_x, y:end_y).wait(500).release(x: end_x, y: end_y).perform();
+			Thread.sleep(8000);
+			
+		}
+		@AfterClass
+		public void stop()
+		{
+			d.closeApp();
+		}
+
+
+	}
+
+
+

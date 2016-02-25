@@ -1,0 +1,25 @@
+package abcpack;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.*;
+//import org.testng.annotations.Test;
+
+public class Test {
+
+	public static void main(String args[]) throws Exception
+	{
+		FileOutputStream fos=new FileOutputStream("F:\\test1.xlsx");
+		XSSFWorkbook wb=new XSSFWorkbook();
+		XSSFSheet s = wb.createSheet("Results");
+		Row row = s.createRow(0);
+		row.createCell(0).setCellValue("Selenium");
+		row.createCell(1).setCellValue("Appium");
+		wb.write(fos);
+		fos.close();
+		
+	}
+
+}

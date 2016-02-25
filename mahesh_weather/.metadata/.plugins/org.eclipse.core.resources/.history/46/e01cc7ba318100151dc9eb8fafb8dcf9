@@ -1,0 +1,72 @@
+package com.weather;
+
+
+	
+		import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+
+	import java.net.URL;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
+	import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+	public class VideoAds {
+				AppiumDriver d;
+		@BeforeClass
+		public void setUp() throws Exception
+		{
+			System.out.println("Caps setting");
+			DesiredCapabilities caps=new DesiredCapabilities();
+			caps.setCapability("deviceName", "NEXUS4");
+			caps.setCapability("platformName", "Android");
+			caps.setCapability("platformVersion", "5.1.1");
+			
+			caps.setCapability("appPackage", "com.weather.Weather");
+			caps.setCapability("appActivity", "com.weather.Weather.app.SplashScreenActivity");
+			d = new AndroidDriver(new URL("http://127.0.0.1:4722/wd/hub"), caps);
+			System.out.println("Caps done");
+			d.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			
+			
+		}
+		@Test
+		public void testAd() throws Exception
+		{
+			
+			System.out.println("Now in Test method");
+			
+			/*JavascriptExecutor js = (JavascriptExecutor) d ;
+			  for(int i=1;i<=84;i++)
+			  {
+			  HashMap<String, String> scrollObject = new HashMap<String, String>();
+			  scrollObject.put("direction", "down");
+			  js.executeScript("mobile: scroll", scrollObject);
+
+82837
+			  }*/
+			TouchActions action=new TouchActions(d);
+			d.findElement(By.id("com.weather.Weather:id/search")).click();
+			d.findElement(By.id("android:id/search_src_text")).sendKeys("atlanta");
+			action.sendKeys(Keys.ARROW_DOWN).pause(1000).sendKeys(Keys.ENTER).build().perform();
+			Thread.sleep(8000);
+		}
+		@AfterClass
+		public void stop()
+		{
+			d.closeApp();
+		}
+
+
+	}
+
+
+
