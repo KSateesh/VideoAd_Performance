@@ -18,7 +18,7 @@ public class PropertyFile {
 	{
 	
 		String dataFilePath="String dataFilePath="/Users/vishal.pathania/Downloads/VideoAd_Performance-master_3/videoads/src/test/java/com/weather/videoads/config.properties";
-		";
+		
 		
 		File file = new File(dataFilePath);
 		try {
