@@ -58,8 +58,8 @@ public class VideoAds extends Driver{
 	{
 		
 		//download the App
-		DownloadAPP app=new DownloadAPP();
-		app.downloadTheAPP();
+	//	DownloadAPP app=new DownloadAPP();
+	//	app.downloadTheAPP();
 		Capabilities_android capabilities=new Capabilities_android();
 		capabilities.dcap();
 		
